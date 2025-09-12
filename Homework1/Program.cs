@@ -6,6 +6,9 @@ class Program
     {
         Console.ForegroundColor = ConsoleColor.Blue;
         Console.WriteLine("Saba Jikurashvili");
+        Console.Write("Enter input : ");
+        string input = Console.ReadLine();
+        Console.WriteLine(input);
             
     }
 }
