@@ -6,67 +6,115 @@ class Program
     {
         // N1
 
-        Console.Write("Enter array length : ");
-        int length = int.Parse(Console.ReadLine());
-        int[] array = new int[length];
-        for (int i = 0; i < length; i++)
+        // Console.Write("Enter array length : ");
+        // int length = int.Parse(Console.ReadLine());
+        // int[] array = new int[length];
+        // for (int i = 0; i < length; i++)
+        // {
+        //     Console.Write("Enter array element : ");
+        //     array[i] = int.Parse(Console.ReadLine());
+        // }
+        //
+        // Console.WriteLine("your array : ");
+        //
+        // foreach (var num in array)
+        // {
+        //     Console.Write(num + " ");
+        // }
+        //
+        // int countForEvens = 0;
+        // int countForOdds = 0;
+        //
+        // for (int i = 0; i < array.Length; i++)
+        // {
+        //     if (array[i] % 2 == 0)
+        //     {
+        //         countForEvens++;
+        //     }
+        //     else
+        //     {
+        //         countForOdds++;
+        //     }
+        // }
+        // var evensArray = new int[countForEvens];
+        // var oddsArray = new int[countForOdds];
+        // int e = 0;
+        // int o = 0;
+        //
+        // for (int i = 0; i < array.Length; i++)
+        // {
+        //    
+        //     if (array[i] % 2 == 0)
+        //     {
+        //         evensArray[e] = array[i];
+        //         e++;
+        //     }
+        //     else
+        //     {
+        //         oddsArray[o] = array[i];
+        //         o++;
+        //     }
+        // }
+        //
+        // Console.WriteLine("\neven array : ");
+        // foreach (var evenNums in evensArray)
+        // {
+        //     Console.Write(evenNums + " ");
+        // }
+        //
+        // Console.WriteLine("\nodd array : ");
+        // foreach (var oddNums in oddsArray)
+        // {
+        //     Console.Write(oddNums + " ");
+        // }
+        
+        
+        
+        //N2
+        
+        Dictionary<string,string> contacts = new Dictionary<string,string>();
+        while (true)
         {
-            Console.Write("Enter array element : ");
-            array[i] = int.Parse(Console.ReadLine());
-        }
-
-        Console.WriteLine("your array : ");
-
-        foreach (var num in array)
-        {
-            Console.Write(num + " ");
-        }
-
-        int countForEvens = 0;
-        int countForOdds = 0;
-
-        for (int i = 0; i < array.Length; i++)
-        {
-            if (array[i] % 2 == 0)
+            Console.WriteLine("enter what you want to do: add | remove | allcontacts | exit ");
+            string input = Console.ReadLine();
+            if (input == "exit")
             {
-                countForEvens++;
+                break;
             }
-            else
+            if (input.ToLower() == "add" )
             {
-                countForOdds++;
-            }
-        }
-        var evensArray = new int[countForEvens];
-        var oddsArray = new int[countForOdds];
-        int e = 0;
-        int o = 0;
+                Console.Write("Enter first name: ");
+                string name = Console.ReadLine();
+                Console.Write("Enter number : ");
+                string number = Console.ReadLine();
 
-        for (int i = 0; i < array.Length; i++)
-        {
-           
-            if (array[i] % 2 == 0)
+                contacts.Add(name, number);
+                Console.WriteLine($"Added contact {name} with number {number}");
+            }
+            else if (input.ToLower() == "remove")
             {
-                evensArray[e] = array[i];
-                e++;
+                Console.Write("Enter name what you want to remove: ");
+                string name = Console.ReadLine();
+                if (contacts.ContainsKey(name))
+                {
+                    contacts.Remove(name);
+                    Console.WriteLine($"Removed contact {name}");
+                }
+                else
+                {
+                    Console.WriteLine("There is no such contact");
+                }
+                
             }
-            else
+            else if (input.ToLower() == "allcontacts")
             {
-                oddsArray[o] = array[i];
-                o++;
+                foreach (var pair in contacts)
+                {
+                    Console.WriteLine($"{pair.Key} : {pair.Value}");
+                }
             }
         }
-
-        Console.WriteLine("\neven array : ");
-        foreach (var evenNums in evensArray)
-        {
-            Console.Write(evenNums + " ");
-        }
-
-        Console.WriteLine("\nodd array : ");
-        foreach (var oddNums in oddsArray)
-        {
-            Console.Write(oddNums + " ");
-        }
+        
 
     }
 }
