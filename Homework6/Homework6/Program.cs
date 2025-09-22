@@ -119,35 +119,50 @@ class Program
         
         //N3
 
-        Console.Write("Enter length of array: ");
-        int length = int.Parse(Console.ReadLine());
-        int[] array = new int[length];
-        for (int i = 0; i < length; i++)
-        {
-            Console.WriteLine("Enter element: ");
-            array[i] = int.Parse(Console.ReadLine());   
-        }
+       //  Console.Write("Enter length of array: ");
+       //  int length = int.Parse(Console.ReadLine());
+       //  int[] array = new int[length];
+       //  for (int i = 0; i < length; i++)
+       //  {
+       //      Console.WriteLine("Enter element: ");
+       //      array[i] = int.Parse(Console.ReadLine());   
+       //  }
+       //
+       //
+       //  foreach (var num in array)
+       //  {
+       //      Console.Write(num + " ");
+       //      
+       //  }
+       //
+       //  Console.WriteLine();
+       //  
+       //
+       // var groups = array.GroupBy(x => x);
+       // foreach (var x in groups)
+       // {
+       //     Console.WriteLine($"{x.Key} appears {x.Count()} times in the array sum {x.Sum()}"); 
+       // }
        
-
-        foreach (var num in array)
-        {
-            Console.Write(num + " ");
-            
-        }
-
-        Console.WriteLine();
-        
-
-       var groups = array.GroupBy(x => x);
-       foreach (var x in groups)
+       
+       //N4
+       
+       Console.Write("Enter length of array: ");
+       int length = int.Parse(Console.ReadLine());
+       int[] array = new int[length];
+       for (int i = 0; i < length; i++)
        {
-           Console.WriteLine($"{x.Key} appears {x.Count()} times in the array sum {x.Sum()}"); 
+           Console.WriteLine("Enter element: ");
+           array[i] = int.Parse(Console.ReadLine());   
        }
-        
-
-        
-
-
-
+       
+       var sortedArray = array.OrderBy(x => x).ToArray();
+       Console.WriteLine("Enter n : ");
+       int n = int.Parse(Console.ReadLine());
+       var lastElements = sortedArray.TakeLast(n);
+       foreach (var elements in lastElements)
+       {
+           Console.Write(elements + " ");
+       }
     }
 }
