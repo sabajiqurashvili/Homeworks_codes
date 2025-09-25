@@ -36,82 +36,89 @@ class Program
 
         //N4
 
-    //     int[] arr = new int[7];
-    //     string[] Weekdays = new string[]
-    //     {
-    //         "Monday",
-    //         "Tuesday",
-    //         "Wednesday",
-    //         "Thursday",
-    //         "Friday",
-    //         "Saturday",
-    //         "Sunday"
-    //     };
-    //
-    // for (int i = 0; i < 7; i++)
-    //     {
-    //         Console.WriteLine($"enter hours of {Weekdays[i]} : ");
-    //         int hours = int.Parse(Console.ReadLine());
-    //         arr[i] = hours;
-    //     }
-    //
-    //     int overtimeBonus = 5;
-    //     int hourlypay = 10;
-    //     int weekdaysincome = 0;
-    //     int weekendincome = 0;
-    //     
-    //     for (int i = 0; i < 5; i++)
-    //     {
-    //         if (arr[i] <= 8)
-    //         {
-    //             weekdaysincome += arr[i]*hourlypay;
-    //         }
-    //         else
-    //         {
-    //             weekdaysincome += 8*hourlypay + overtimeBonus*(arr[i] - 8);
-    //         }
-    //     }
-    //
-    //     for (int i = 5; i < 7; i++)
-    //     {
-    //         weekendincome += arr[i]*hourlypay*2;
-    //     }
-    //     int earned = weekdaysincome + weekendincome;
-    //     foreach (var hour in arr)
-    //     {
-    //         Console.Write(hour + " ");
-    //     }
-    //
-    //     Console.WriteLine();
-    //
-    //     Console.WriteLine($"This week you have earned {earned}$");
-    //     
+        //     int[] arr = new int[7];
+        //     string[] Weekdays = new string[]
+        //     {
+        //         "Monday",
+        //         "Tuesday",
+        //         "Wednesday",
+        //         "Thursday",
+        //         "Friday",
+        //         "Saturday",
+        //         "Sunday"
+        //     };
+        //
+        // for (int i = 0; i < 7; i++)
+        //     {
+        //         Console.WriteLine($"enter hours of {Weekdays[i]} : ");
+        //         int hours = int.Parse(Console.ReadLine());
+        //         arr[i] = hours;
+        //     }
+        //
+        //     int overtimeBonus = 5;
+        //     int hourlypay = 10;
+        //     int weekdaysincome = 0;
+        //     int weekendincome = 0;
+        //     
+        //     for (int i = 0; i < 5; i++)
+        //     {
+        //         if (arr[i] <= 8)
+        //         {
+        //             weekdaysincome += arr[i]*hourlypay;
+        //         }
+        //         else
+        //         {
+        //             weekdaysincome += 8*hourlypay + overtimeBonus*(arr[i] - 8);
+        //         }
+        //     }
+        //
+        //     for (int i = 5; i < 7; i++)
+        //     {
+        //         weekendincome += arr[i]*hourlypay*2;
+        //     }
+        //     int earned = weekdaysincome + weekendincome;
+        //     foreach (var hour in arr)
+        //     {
+        //         Console.Write(hour + " ");
+        //     }
+        //
+        //     Console.WriteLine();
+        //
+        //     Console.WriteLine($"This week you have earned {earned}$");
+        //     
 
-    
-    //N5
 
-    int[] arr = {
-        5, 5, 5 ,7,4,5
-        
-    };
-    int count = 0;
-    for (int i = 1; i < arr.Length; i++)
-    {
-        if (arr[i - 1] < arr[i])
+        //N5
+
+        // int[] arr = {5, 5, 5 ,7,4,5};
+        // int count = 0;
+        // for (int i = 1; i < arr.Length; i++)
+        // {
+        //     if (arr[i - 1] < arr[i])
+        //     {
+        //         count++;
+        //     }
+        //     
+        // }
+        //
+        // foreach (var num in arr)
+        // {
+        //     Console.Write(num + " ");
+        // }
+        //
+        // Console.WriteLine();
+        // Console.WriteLine(count);
+
+
+        //N6
+        string[] arr = new string[] { "Hello", "World", "Programming", "communication" };
+        Console.WriteLine("Enter lenght : ");
+        int lenght = int.Parse(Console.ReadLine());
+        var res = arr.Where(x => x.Length == lenght);
+
+        foreach (var words in res)
         {
-            count++;
+            Console.Write(words + ", ");
         }
-        
     }
-    
-    foreach (var num in arr)
-    {
-        Console.Write(num + " ");
-    }
-
-    Console.WriteLine();
-    Console.WriteLine(count);
-    
-    }
-
 }
