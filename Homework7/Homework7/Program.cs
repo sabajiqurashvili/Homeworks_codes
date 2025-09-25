@@ -14,7 +14,10 @@ class Program
         
         //N2
         
-        var input = [ “@”,“@”,“@”,“@”,“@”,“@”]
-        
+        var input = new Char[] { '@', '@', '@', '@', '@' };
+        var res = input.All(x => x == input[Array.IndexOf(input, x)+1]);
+        Console.WriteLine(res ? "Yes" : "No");
+       
+
     }
 }
