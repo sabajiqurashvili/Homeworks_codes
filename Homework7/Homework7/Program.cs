@@ -4,6 +4,13 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        //N1
+        Console.WriteLine("Enter Radius : ");
+        var radius = int.Parse(Console.ReadLine());
+        var s1 = (2 * radius) * (2 * radius);
+        var s2 = 2 * radius * radius;
+        var dif = s1 - s2;
+        Console.WriteLine($"dif = {dif} while radius = {radius}");
+        
     }
 }
