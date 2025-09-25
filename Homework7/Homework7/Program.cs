@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Threading.Channels;
 
 namespace Homework7;
 
@@ -35,59 +36,82 @@ class Program
 
         //N4
 
-        int[] arr = new int[7];
-        string[] Weekdays = new string[]
-        {
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday"
-        };
+    //     int[] arr = new int[7];
+    //     string[] Weekdays = new string[]
+    //     {
+    //         "Monday",
+    //         "Tuesday",
+    //         "Wednesday",
+    //         "Thursday",
+    //         "Friday",
+    //         "Saturday",
+    //         "Sunday"
+    //     };
+    //
+    // for (int i = 0; i < 7; i++)
+    //     {
+    //         Console.WriteLine($"enter hours of {Weekdays[i]} : ");
+    //         int hours = int.Parse(Console.ReadLine());
+    //         arr[i] = hours;
+    //     }
+    //
+    //     int overtimeBonus = 5;
+    //     int hourlypay = 10;
+    //     int weekdaysincome = 0;
+    //     int weekendincome = 0;
+    //     
+    //     for (int i = 0; i < 5; i++)
+    //     {
+    //         if (arr[i] <= 8)
+    //         {
+    //             weekdaysincome += arr[i]*hourlypay;
+    //         }
+    //         else
+    //         {
+    //             weekdaysincome += 8*hourlypay + overtimeBonus*(arr[i] - 8);
+    //         }
+    //     }
+    //
+    //     for (int i = 5; i < 7; i++)
+    //     {
+    //         weekendincome += arr[i]*hourlypay*2;
+    //     }
+    //     int earned = weekdaysincome + weekendincome;
+    //     foreach (var hour in arr)
+    //     {
+    //         Console.Write(hour + " ");
+    //     }
+    //
+    //     Console.WriteLine();
+    //
+    //     Console.WriteLine($"This week you have earned {earned}$");
+    //     
 
-    for (int i = 0; i < 7; i++)
-        {
-            Console.WriteLine($"enter hours of {Weekdays[i]} : ");
-            int hours = int.Parse(Console.ReadLine());
-            arr[i] = hours;
-        }
+    
+    //N5
 
-        int overtimeBonus = 5;
-        int hourlypay = 10;
-        int weekdaysincome = 0;
-        int weekendincome = 0;
+    int[] arr = {
+        5, 5, 5 ,7,4,5
         
-        for (int i = 0; i < 5; i++)
+    };
+    int count = 0;
+    for (int i = 1; i < arr.Length; i++)
+    {
+        if (arr[i - 1] < arr[i])
         {
-            if (arr[i] <= 8)
-            {
-                weekdaysincome += arr[i]*hourlypay;
-            }
-            else
-            {
-                weekdaysincome += 8*hourlypay + overtimeBonus*(arr[i] - 8);
-            }
+            count++;
         }
-
-        for (int i = 5; i < 7; i++)
-        {
-            weekendincome += arr[i]*hourlypay*2;
-        }
-        int earned = weekdaysincome + weekendincome;
-        foreach (var hour in arr)
-        {
-            Console.Write(hour + " ");
-        }
-
-        Console.WriteLine();
-
-        Console.WriteLine($"This week you have earned {earned}$");
         
+    }
+    
+    foreach (var num in arr)
+    {
+        Console.Write(num + " ");
+    }
 
-      
-
+    Console.WriteLine();
+    Console.WriteLine(count);
+    
     }
 
 }
