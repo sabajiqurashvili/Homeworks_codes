@@ -85,7 +85,7 @@ class Program
         //     Console.WriteLine();
         //
         //     Console.WriteLine($"This week you have earned {earned}$");
-        //     
+            
 
 
         //N5
@@ -111,14 +111,14 @@ class Program
 
 
         //N6
-        string[] arr = new string[] { "Hello", "World", "Programming", "communication" };
-        Console.WriteLine("Enter lenght : ");
-        int lenght = int.Parse(Console.ReadLine());
-        var res = arr.Where(x => x.Length == lenght);
-
-        foreach (var words in res)
-        {
-            Console.Write(words + ", ");
-        }
+        // string[] arr = new string[] { "Hello", "World", "Programming", "communication" };
+        // Console.WriteLine("Enter lenght : ");
+        // int lenght = int.Parse(Console.ReadLine());
+        // var res = arr.Where(x => x.Length == lenght);
+        //
+        // foreach (var words in res)
+        // {
+        //     Console.Write(words + ", ");
+        // }
     }
 }
