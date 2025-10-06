@@ -6,7 +6,7 @@ public class Student
     public int Age { get; set; }
     public int AdmissionYear { get; set; }
 
-    public string Subject;
+    private string Subject;
     
     
 
