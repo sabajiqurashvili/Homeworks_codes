@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeWork11", "HomeWork11\Ho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H11N2", "H11N2\H11N2.csproj", "{2A5BBA0C-7B06-43BD-AA92-47052F3B0DC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H11N3", "H11N3\H11N3.csproj", "{1865ABA0-4F0A-4EBF-A173-FE2970590B12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{2A5BBA0C-7B06-43BD-AA92-47052F3B0DC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A5BBA0C-7B06-43BD-AA92-47052F3B0DC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A5BBA0C-7B06-43BD-AA92-47052F3B0DC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1865ABA0-4F0A-4EBF-A173-FE2970590B12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1865ABA0-4F0A-4EBF-A173-FE2970590B12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1865ABA0-4F0A-4EBF-A173-FE2970590B12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1865ABA0-4F0A-4EBF-A173-FE2970590B12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
