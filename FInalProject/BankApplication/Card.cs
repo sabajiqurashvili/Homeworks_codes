@@ -87,9 +87,9 @@ public class Card
     public string CheckBalance()
     {
         Log.Information("{FirstName} {LastName} Checked balance", FirstName, LastName);
-        Log.Information($"balance : \n" +
-                        $"GEL : {GELAmount}\n" +
-                        $"EUR : {EURAmount}\n" +
+        Log.Information($"balance : " +
+                        $"GEL : {GELAmount}" +
+                        $"EUR : {EURAmount}" +
                         $"USD : {USDAmount}");
         Transactions.Add($"{FirstName} {LastName} Checked balance");
         return $"Balance :\n" +
