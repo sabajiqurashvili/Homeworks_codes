@@ -1,0 +1,90 @@
+{
+  "Timestamp": "2025-10-15T10:07:00.5526916+04:00",
+  "Level": "Information",
+  "MessageTemplate": "card details {@card}",
+  "RenderedMessage": "card details Card { FirstName: \"saba\", LastName: \"jikurashvili\", CardNumber: \"1234567812341235\", ExpirationDate: \"04/30\", Cvc: \"423\" }",
+  "Properties": {
+    "card": {
+      "FirstName": "saba",
+      "LastName": "jikurashvili",
+      "CardNumber": "1234567812341235",
+      "ExpirationDate": "04/30",
+      "Cvc": "423",
+      "_typeTag": "Card"
+    }
+  }
+}
+{
+  "Timestamp": "2025-10-15T10:07:05.1736932+04:00",
+  "Level": "Information",
+  "MessageTemplate": "{FirstName} {LastName} Checked balance",
+  "RenderedMessage": "\"saba\" \"jikurashvili\" Checked balance",
+  "Properties": {
+    "FirstName": "saba",
+    "LastName": "jikurashvili"
+  }
+}
+{
+  "Timestamp": "2025-10-15T10:07:05.1856786+04:00",
+  "Level": "Information",
+  "MessageTemplate": "balance : GEL : 0EUR : 0USD : 0",
+  "RenderedMessage": "balance : GEL : 0EUR : 0USD : 0"
+}
+{
+  "Timestamp": "2025-10-15T10:07:09.9883729+04:00",
+  "Level": "Information",
+  "MessageTemplate": "{FirstName} {LastName} added {Amount} GEl amount",
+  "RenderedMessage": "\"saba\" \"jikurashvili\" added 10 GEl amount",
+  "Properties": {
+    "FirstName": "saba",
+    "LastName": "jikurashvili",
+    "Amount": 10
+  }
+}
+{
+  "Timestamp": "2025-10-15T10:07:16.6474500+04:00",
+  "Level": "Information",
+  "MessageTemplate": "{FirstName} {LastName} Withdrawn {Amount} GEL ",
+  "RenderedMessage": "\"saba\" \"jikurashvili\" Withdrawn 4 GEL ",
+  "Properties": {
+    "FirstName": "saba",
+    "LastName": "jikurashvili",
+    "Amount": 4
+  }
+}
+{
+  "Timestamp": "2025-10-15T10:07:26.3297443+04:00",
+  "Level": "Information",
+  "MessageTemplate": "{FirstName} {LastName} checked last 5 transaction",
+  "RenderedMessage": "\"saba\" \"jikurashvili\" checked last 5 transaction",
+  "Properties": {
+    "FirstName": "saba",
+    "LastName": "jikurashvili"
+  }
+}
+{
+  "Timestamp": "2025-10-15T10:07:26.3311727+04:00",
+  "Level": "Information",
+  "MessageTemplate": "Last 5 transactions of : {FirstName} {LastName} is {@Lasttransactions} ",
+  "RenderedMessage": "Last 5 transactions of : \"saba\" \"jikurashvili\" is [\"saba jikurashvili Checked balance\", \"saba jikurashvili added 10 GEl amount\", \"saba jikurashvili Withdrawn 4 GEL\"] ",
+  "Properties": {
+    "FirstName": "saba",
+    "LastName": "jikurashvili",
+    "Lasttransactions": [
+      "saba jikurashvili Checked balance",
+      "saba jikurashvili added 10 GEl amount",
+      "saba jikurashvili Withdrawn 4 GEL"
+    ]
+  }
+}
+{
+  "Timestamp": "2025-10-15T10:07:52.1561139+04:00",
+  "Level": "Information",
+  "MessageTemplate": "{FirstName} {LastName} changed pin code to {PinCode}",
+  "RenderedMessage": "\"saba\" \"jikurashvili\" changed pin code to 1456",
+  "Properties": {
+    "FirstName": "saba",
+    "LastName": "jikurashvili",
+    "PinCode": 1456
+  }
+}
