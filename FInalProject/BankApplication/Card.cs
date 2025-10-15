@@ -160,20 +160,20 @@ public class Card
                 Transactions.Add($"{FirstName} {LastName} converted from GEL to USD | {amountInGEL} GEL");
                 break;
             case ("EUR", "GEL"):
-                EURAmount -= amountInGEL * eur;
+                EURAmount -= amountInGEL ;
                 GELAmount += amountInGEL / eur;
-                Log.Information("{FirstName} {LastName} converted from EUR to GEL | {AmountInGEL} GEL", FirstName,
+                Log.Information("{FirstName} {LastName} converted from EUR to GEL | {AmountInGEL} EUR", FirstName,
                     LastName, amountInGEL);
-                Console.WriteLine($"{FirstName} {LastName} converted from EUR to GEL | {amountInGEL} GEL");
-                Transactions.Add($"{FirstName} {LastName} converted from EUR to GEL | {amountInGEL} GEL");
+                Console.WriteLine($"{FirstName} {LastName} converted from EUR to GEL | {amountInGEL} EUR");
+                Transactions.Add($"{FirstName} {LastName} converted from EUR to GEL | {amountInGEL} EUR");
                 break;
             case ("USD", "GEL"):
-                USDAmount -= amountInGEL * usd;
+                USDAmount -= amountInGEL;
                 GELAmount += amountInGEL / usd;
-                Log.Information("{FirstName} {LastName} converted from USD to GEL | {AmountInGEL} GEL", FirstName,
+                Log.Information("{FirstName} {LastName} converted from USD to GEL | {AmountInGEL} USD", FirstName,
                     LastName, amountInGEL);
-                Console.WriteLine($"{FirstName} {LastName} converted from USD to GEL | {amountInGEL} GEL");
-                Transactions.Add($"{FirstName} {LastName} converted from USD to GEL | {amountInGEL} GEL");
+                Console.WriteLine($"{FirstName} {LastName} converted from USD to GEL | {amountInGEL} USD");
+                Transactions.Add($"{FirstName} {LastName} converted from USD to GEL | {amountInGEL} USD");
                 break;
             default:
                 Console.WriteLine("Invalid input");

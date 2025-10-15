@@ -12,7 +12,7 @@ class Program
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .WriteTo.File(
-                new JsonFormatter(closingDelimiter: Environment.NewLine),
+                new JsonFormatter(renderMessage: true ,closingDelimiter: Environment.NewLine),
                 @"C:\Users\Jikura\Desktop\davalebebi\Homeworks\FInalProject\BankApplication\logs.json",
                 rollingInterval: RollingInterval.Day,
                 shared: true
@@ -90,12 +90,14 @@ class Program
                                   "4 Change Amount \n" +
                                   "5 Last 5 transactions \n" +
                                   "6 Change Pincode");
+                Console.WriteLine("wtite exit to finish");
                 string done = Console.ReadLine();
                 if (done == "exit")
                 {
+                    Console.WriteLine("Application closed");
+                    Log.CloseAndFlush();
                     break;
-                }
-
+                } 
                 if (int.TryParse(done, out int choice))
                 {
                     switch (choice)
@@ -145,6 +147,7 @@ class Program
                             Console.WriteLine(string.Join(",", card.Last5Transactions()));
                             break;
                         case 6:
+                            Console.WriteLine("Enter new Pincode : ");
                             int newPinCode = int.TryParse(Console.ReadLine(), out int code) ? code : 0;
                             if (newPinCode > 0) card.ChangePinCode(newPinCode);
                             else
