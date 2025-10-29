@@ -1,3 +1,5 @@
+using Homework15.Middlewares;
+
 namespace Homework15;
 
 public class Program
@@ -18,6 +20,8 @@ public class Program
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
+
+        app.UseMiddleware<MyMiddleware>();
 
         app.UseHttpsRedirection();
         app.UseRouting();
