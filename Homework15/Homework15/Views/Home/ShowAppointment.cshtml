@@ -1,0 +1,35 @@
+@model List<Homework15.Models.Person>
+
+@{
+    ViewData["Title"] = "Appointed Persons";
+}
+
+<h2>Appointed Persons</h2>
+
+@if (Model == null || Model.Count == 0)
+{
+    <p>No appointments found.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Other Info</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var person in Model)
+        {
+            <tr>
+                <td>@person.Name</td>
+                <td>@person.LastName</td>
+                <td>@person.Doctor</td>
+                <td>@person.Time</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
