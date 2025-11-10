@@ -109,3 +109,132 @@ join [Production].[Products] prod on prod.productid = orddet.productid
 join [Production].[Categories] cat on cat.categoryid = prod.categoryid
 where cat.categoryname in ('Beverages','Dairy Products')
 
+
+use [Hardware]
+
+select * from [dbo].[Manufacturers]
+
+select * from [dbo].[Products]
+---- N1 -----
+
+select * from [dbo].[Products] where ManufacturerId=
+(
+select ManufacturerId from [dbo].[Manufacturers] man
+where man.Name = 'Hewlett-Packard'
+)
+
+
+---- N2 -----
+
+select prod.Name,prod.Price from [dbo].[Products] prod where 
+ManufacturerId not in 
+(
+select ManufacturerId from [dbo].[Manufacturers] man
+where man.Name in ('Fujitsu')
+)
+
+---- N3 -----
+
+select prod.Name,prod.Price from [dbo].[Products] prod where 
+ManufacturerId in 
+(
+select ManufacturerId from [dbo].[Manufacturers] man
+where man.Name  in ('Fujitsu','Sony','IBM','Intel')
+)
+
+---- N4 -----
+
+
+select * from [dbo].[Manufacturers] man
+where man.ManufacturerId in 
+(
+select ManufacturerId from [dbo].[Products] prod 
+where prod.Price > 200
+)
+
+---- N5 -----
+
+select * from [dbo].[Products] prod 
+where ManufacturerId in 
+(
+select ManufacturerId from [dbo].[Manufacturers] man
+where man.Name not in ('Dell','Genius')
+)
+
+---- N6 -----
+
+select Distinct count(man.ManufacturerId) as QuantityOfManufactors from [dbo].[Manufacturers] man
+where man.ManufacturerId in 
+(
+select ManufacturerId from [dbo].[Products] prod
+where prod.Name LIKE ('%drive')
+)
+
+---- N7 -----
+
+select count(*) from [dbo].[Products] prod
+where prod.ManufacturerId  in
+(
+select ManufacturerId from [dbo].[Manufacturers] man
+where man.Name = 'Intel'
+) and 
+prod.Price >
+(
+select AVG(Price) from [dbo].[Products]
+where ManufacturerId in 
+(
+select ManufacturerId from [dbo].[Manufacturers] man
+where man.Name = 'Intel'
+)
+)
+
+
+use [WorldEvents]
+
+
+---- N1 -----
+
+select Count(*) from [dbo].[Event]
+where CountryID in
+(
+select CountryID  from [dbo].[Country] c
+where c.ContinentID in 
+(
+select ContinentID from [dbo].[Continent] con
+where con.ContinentName = 'Europe'
+)
+)
+
+
+---- N2 -----
+
+select MIN(e.EventDate) from [dbo].[Event] e
+join [dbo].[Country] c on c.CountryID = e.CountryID
+join [dbo].[Continent] cont on cont.ContinentID = c.ContinentID
+where cont.ContinentName = 'Africa'
+
+---- N3 -----
+
+select COUNT(*) from [dbo].[Country] c
+join [dbo].[Continent] cont on cont.ContinentID = c.ContinentID
+where cont.ContinentName in ('North America','South America')
+
+
+---- N4 -----
+
+select COUNT(*) from [dbo].[Event] e
+join [dbo].[Category] c on c.CategoryID = e.CategoryID
+where c.CategoryName = 'Economy'
+and MONTH(e.EventDate) = 1
+and DAY(e.EventDate) = 1
+
+
+---- N5 -----
+
+select MAX(e.EventDate) from [dbo].[Event] e
+join [dbo].[Category] cat on cat.CategoryID = e.CategoryID
+join  [dbo].[Country] cou on cou.CountryID = e.CountryID
+join [dbo].[Continent] cont on cont.ContinentID = cou.ContinentID
+where cat.CategoryName = 'Sports' and cont.ContinentName = 'Europe'
+
+
