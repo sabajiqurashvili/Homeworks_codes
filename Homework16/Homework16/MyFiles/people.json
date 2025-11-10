@@ -1,28 +1,15 @@
 [
   {
-    "CreateDate": "2025-11-03T16:45:35.848Z",
+    "CreateDate": "2025-11-04T05:31:07.593Z",
     "FirstName": "saba",
-    "LastName": "jikura",
+    "LastName": "jikurashvili",
     "JobPosition": "string",
-    "Salary": 2750,
-    "WorkExperience": 3,
+    "Salary": 5000,
+    "WorkExperience": 2,
     "PersonAdress": {
       "Country": "string",
       "City": "string",
-      "HomeNumber": 14
-    }
-  },
-  {
-    "CreateDate": "2025-11-03T16:30:51.263Z",
-    "FirstName": "saba",
-    "LastName": "string",
-    "JobPosition": "string",
-    "Salary": 4000,
-    "WorkExperience": 4,
-    "PersonAdress": {
-      "Country": "string",
-      "City": "tbilisi",
-      "HomeNumber": 4
+      "HomeNumber": 10
     }
   }
 ]
