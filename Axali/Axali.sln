@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axali", "Axali\Axali.csproj", "{5BF1C198-78E2-4538-8F46-1CDFE306D356}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axali.Domain", "Axali.Domain\Axali.Domain.csproj", "{D67BFCC0-87D8-4788-A072-A67C045AF6DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axali.Data", "Axali.Data\Axali.Data.csproj", "{0BEF98CA-19F2-4EB9-9F72-C6D1F2FE3A8C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5BF1C198-78E2-4538-8F46-1CDFE306D356}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF1C198-78E2-4538-8F46-1CDFE306D356}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF1C198-78E2-4538-8F46-1CDFE306D356}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF1C198-78E2-4538-8F46-1CDFE306D356}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D67BFCC0-87D8-4788-A072-A67C045AF6DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D67BFCC0-87D8-4788-A072-A67C045AF6DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D67BFCC0-87D8-4788-A072-A67C045AF6DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D67BFCC0-87D8-4788-A072-A67C045AF6DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BEF98CA-19F2-4EB9-9F72-C6D1F2FE3A8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BEF98CA-19F2-4EB9-9F72-C6D1F2FE3A8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BEF98CA-19F2-4EB9-9F72-C6D1F2FE3A8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BEF98CA-19F2-4EB9-9F72-C6D1F2FE3A8C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
