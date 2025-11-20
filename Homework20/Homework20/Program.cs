@@ -1,8 +1,11 @@
 using System.Text;
 using System.Text.Json.Serialization;
 using Homework20.Data;
+using Homework20.Domain;
+using Homework20.interfaces;
 using Homework20.Model;
 using Homework20.services;
+using Homework20.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -61,6 +64,7 @@ public class Program
             });
         
         builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<IPerson<Person>,PersonService>();
 
         var app = builder.Build();
 
