@@ -8,6 +8,7 @@ public class LoggedUserInfo
     
     //1 to 1
     public int UserId { get; set; }
+    public User User { get; set; }
     
     
 }
