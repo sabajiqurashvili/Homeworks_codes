@@ -1,5 +1,7 @@
+using System.Security.Claims;
 using BankApp_API.services;
 using BankApp_API.services.Models;
+using BankApp_Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -68,7 +70,7 @@ public class UserController : Controller
         try
         {
             var result = await _userService.GetUserByIdAsync(id);
-            if (result == null) 
+            if (result == null)
                 return NotFound("User not found");
 
             return Ok(result);
@@ -78,4 +80,80 @@ public class UserController : Controller
             return BadRequest(e.Message);
         }
     }
+
+    [Authorize(Roles = Roles.User)]
+    [HttpPost("LoanRequest")]
+    public async Task<IActionResult> RequestLoan([FromBody] LoanDto loanDto)
+    {
+        var currentUserId = int.Parse(User.FindFirst(ClaimTypes.Name).Value);
+        var CurrentUser = await _userService.GetUserByIdAsync(currentUserId);
+        if (CurrentUser.IsBlocked)
+        {
+            return Forbid("You are Blocked So you can't request loan");
+        }
+
+        var validation = new Validations.LoanDtoValidator();
+        var validationResult = validation.Validate(loanDto);
+        if (!validationResult.IsValid)
+        {
+            var errors = validationResult.Errors.Select(error => error.ErrorMessage);
+            return BadRequest(errors);
+        }
+
+        var loan = await _userService.RequestLoan(currentUserId, loanDto);
+        return Ok(loan);
+
+    }
+
+    [Authorize(Roles = Roles.User)]
+    [HttpGet("GetLoans")]
+    public async Task<IActionResult> GetLoans()
+    {
+        var currentUserId = int.Parse(User.FindFirst(ClaimTypes.Name).Value);
+        var loans = await _userService.GetLoans(currentUserId);
+        return Ok(loans);
+    }
+
+    [Authorize(Roles = Roles.User)]
+    [HttpPut("UpdateLoan/{loanId}")]
+    public async Task<IActionResult> UpdateLoan(int loanId,[FromBody] LoanDto loanDto)
+    {
+        var currentUserId = int.Parse(User.FindFirst(ClaimTypes.Name).Value);
+        var validation = new Validations.LoanDtoValidator();
+        var validationResult = validation.Validate(loanDto);
+        if (!validationResult.IsValid)
+        {
+            var errors = validationResult.Errors.Select(error => error.ErrorMessage);
+            return BadRequest(errors);
+        }
+
+        try
+        {
+            var loan = await _userService.UpdateLoan(currentUserId, loanId, loanDto);
+            return Ok(loan);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+        
+    }
+
+    [Authorize(Roles = Roles.User)]
+    [HttpDelete("DeleteLoan/{loanId}")]
+    public async Task<IActionResult> DeleteLoan(int loanId)
+    {
+        var currentUserId = int.Parse(User.FindFirst(ClaimTypes.Name).Value);
+        try
+        {
+            await _userService.DeleteLoan(currentUserId, loanId);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+        return Ok("Loan has been deleted successfully");
+    }
+    
+
 }

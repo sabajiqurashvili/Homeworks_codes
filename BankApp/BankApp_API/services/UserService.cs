@@ -121,6 +121,66 @@ public class UserService : IUserService
         };
     }
 
+    public async  Task<Loan> RequestLoan(int userId,LoanDto loanDto)
+    {
+        var loan = new Loan()
+        {
+            Amount = loanDto.Amount,
+            Currency = loanDto.Currency,
+            LoanPeriodInMonths = loanDto.LoanPeriodInMonths,
+            LoanType = loanDto.LoanType,
+            UserId = userId,
+            Status = Status.Proccesing
+        };
+        _context.Loans.Add(loan);
+        await _context.SaveChangesAsync();
+        return loan;
+    }
+
+    public async Task<List<Loan>> GetLoans(int userId)
+    {
+       var loans = await _context.Loans.Where(l => l.UserId == userId).ToListAsync();
+       return loans;
+    }
+
+    public async Task<Loan> UpdateLoan(int userId, int loanId,LoanDto loanDto)
+    {
+        if (!await _context.Loans.AnyAsync(l => l.UserId == userId && l.Id == loanId))
+        {
+            throw new Exception($"Loan {loanId} not found");
+        }
+        
+       var loan = await _context.Loans.FirstOrDefaultAsync(l => l.UserId == userId && l.Id == loanId);
+       if (loan.Status != Status.Proccesing)
+       {
+           throw new Exception("Loan status must be proccesing");
+       }
+       
+       loan.LoanType = loanDto.LoanType;
+       loan.Amount = loanDto.Amount;
+       loan.Currency = loanDto.Currency;
+       loan.LoanPeriodInMonths = loanDto.LoanPeriodInMonths;
+       _context.Loans.Update(loan);
+       await _context.SaveChangesAsync();
+       return loan;
+    }
+
+    public async Task DeleteLoan(int userId, int loanId)
+    {
+        if (!await _context.Loans.AnyAsync(l => l.UserId == userId && l.Id == loanId))
+        {
+            throw new Exception($"Loan {loanId} not found");
+        }
+        
+        var loan = await _context.Loans.FirstOrDefaultAsync(l => l.UserId == userId && l.Id == loanId);
+        if (loan.Status != Status.Proccesing)
+        {
+            throw new Exception("Loan status must be proccesing");
+        }
+        _context.Loans.Remove(loan);
+        await _context.SaveChangesAsync();
+    }
+
     public async Task<User> GetUserByIdAsync(int id)
     {
         return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);

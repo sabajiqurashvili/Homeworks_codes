@@ -8,6 +8,6 @@ public class LoanDto
     public decimal Amount { get; set; }
     public Currency Currency { get; set; }
     public int LoanPeriodInMonths { get; set; }
-    public Status Status { get; set; }
+
 
 }

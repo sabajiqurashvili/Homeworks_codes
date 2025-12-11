@@ -19,21 +19,21 @@ public class Loan
 
 public enum LoanType
 {
-    QuickLoan = 1,
-    AutoLoan = 2,
-    Installment = 3
+    QuickLoan,
+    AutoLoan ,
+    Installment
 }
 
 public enum Currency
 {
-   GEL = 1,
-   USD = 2,
-   EUR = 3
+   GEL ,
+   USD ,
+   EUR 
 }
 
 public enum Status
 {
-    Proccesing = 1,
-    Approved = 2,
-    Rejected = 3
+    Proccesing ,
+    Approved ,
+    Rejected 
 }
