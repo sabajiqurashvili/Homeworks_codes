@@ -16,7 +16,6 @@ public class UserController : Controller
         _userService = userService;
     }
 
-
     [AllowAnonymous]
     [HttpPost("register")]
     public async Task<IActionResult> RegisterUser([FromBody] RegisterDto registerDto)
@@ -30,6 +29,7 @@ public class UserController : Controller
                 var errors = validationResults.Errors.Select(error => error.ErrorMessage);
                 return BadRequest(errors);
             }
+
             var result = await _userService.RegisterUser(registerDto);
             return Ok(result);
         }
@@ -41,7 +41,7 @@ public class UserController : Controller
 
     [AllowAnonymous]
     [HttpPost("login")]
-    public IActionResult Login([FromBody] LoginDto loginDto)
+    public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
     {
         try
         {
@@ -52,7 +52,8 @@ public class UserController : Controller
                 var errors = validationResult.Errors.Select(error => error.ErrorMessage);
                 return BadRequest(errors);
             }
-            var result = _userService.LoginUser(loginDto);
+
+            var result = await _userService.LoginUserAsync(loginDto);
             return Ok(result);
         }
         catch (Exception e)
@@ -62,12 +63,14 @@ public class UserController : Controller
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetUserById(int id)
+    public async Task<IActionResult> GetUserById(int id)
     {
         try
         {
-            var result = _userService.GetUserById(id);
-            if(result == null) return NotFound("User not found");
+            var result = await _userService.GetUserByIdAsync(id);
+            if (result == null) 
+                return NotFound("User not found");
+
             return Ok(result);
         }
         catch (Exception e)

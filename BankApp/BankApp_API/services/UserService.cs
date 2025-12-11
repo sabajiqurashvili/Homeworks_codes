@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Win32.SafeHandles;
 
 namespace BankApp_API.services;
 
@@ -16,30 +15,39 @@ public class UserService : IUserService
 {
     private readonly BankAppContext _context;
     private readonly AppSettings _settings;
+    private readonly ILogger<UserService> _logger;
 
-    public UserService(BankAppContext context, IOptions<AppSettings> options)
+    public UserService(BankAppContext context, IOptions<AppSettings> options, ILogger<UserService> logger)
     {
         _context = context;
         _settings = options.Value;
+        _logger = logger;
     }
+
     public async Task<User> RegisterUser(RegisterDto registerDto)
     {
         if (await _context.LoggedUserInfos.AnyAsync(u => u.Username == registerDto.UserName))
         {
+            _logger.LogError("Username {Username} already exists", registerDto.UserName);
             throw new Exception($"Username {registerDto.UserName} is already taken");
         }
+
         Accountant accountant = null;
+
         if (registerDto.AccountantId.HasValue)
         {
             accountant = await _context.Accountants
                 .SingleOrDefaultAsync(a => a.Id == registerDto.AccountantId);
 
             if (accountant == null)
+            {
+                _logger.LogError("Accountant {AccountantId} not found", registerDto.AccountantId);
                 throw new Exception($"Accountant {registerDto.AccountantId} not found");
+            }
 
-            // დარწმუნება, რომ EF Core არ შეეცდება ჩაწეროს ახალი record
             _context.Entry(accountant).State = EntityState.Unchanged;
         }
+
         var user = new User()
         {
             UserName = registerDto.UserName,
@@ -51,43 +59,61 @@ public class UserService : IUserService
             Role = Roles.User
         };
 
-
-
         var loggedUser = new LoggedUserInfo()
         {
             Username = registerDto.UserName,
             HashedPassword = HashPassword(registerDto.Password),
             User = user,
         };
-        _context.Users.Add(user); 
-        _context.LoggedUserInfos.Add(loggedUser);  
+
+        _logger.LogInformation("Registering user {Username}", registerDto.UserName);
+
+        _context.Users.Add(user);
+        _context.LoggedUserInfos.Add(loggedUser);
+
         try
         {
             await _context.SaveChangesAsync();
         }
         catch (DbUpdateException dbEx)
         {
-            // დეტალურად გამოაქვეყნებს ყველაფერს
             throw new Exception($"EF Save Error: {dbEx.InnerException?.Message ?? dbEx.Message}");
         }
         catch (Exception ex)
         {
             throw new Exception($"General Error: {ex.Message}");
         }
+
+        _logger.LogInformation("Registered user {Username}", registerDto.UserName);
         return user;
     }
 
-    public LoginResponse LoginUser(LoginDto loginDto)
+    public async Task<LoginResponse> LoginUserAsync(LoginDto loginDto)
     {
-        if (string.IsNullOrEmpty(loginDto.Username) || string.IsNullOrEmpty(loginDto.Password)) return null;
-        var user = _context.Users
-            .Include(u => u.LoggedUserInfo) 
-            .FirstOrDefault(u => u.UserName == loginDto.Username);
-        if(user == null) throw new Exception($"User {loginDto.Username} not found");
+        if (string.IsNullOrEmpty(loginDto.Username) || string.IsNullOrEmpty(loginDto.Password))
+            return null;
+
+        var user = await _context.Users
+            .Include(u => u.LoggedUserInfo)
+            .FirstOrDefaultAsync(u => u.UserName == loginDto.Username);
+
+        if (user == null)
+        {
+            _logger.LogInformation("Username {Username} not found", loginDto.Username);
+            throw new Exception($"User {loginDto.Username} not found");
+        }
+
         bool passwordValid = BCrypt.Net.BCrypt.Verify(loginDto.Password, user.LoggedUserInfo.HashedPassword);
-        if(!passwordValid) throw new Exception($"Password {loginDto.Password} not valid");
-        if (user == null) return null;
+        if (!passwordValid)
+        {
+            _logger.LogInformation("Password {Password} not valid", loginDto.Password);
+            throw new Exception($"Password {loginDto.Password} not valid");
+        }
+
         var token = GenerateToken(user);
+
+        _logger.LogInformation("User {Username} logged in successfully", loginDto.Username);
+
         return new LoginResponse()
         {
             Token = token,
@@ -95,9 +121,9 @@ public class UserService : IUserService
         };
     }
 
-    public User GetUserById(int id)
+    public async Task<User> GetUserByIdAsync(int id)
     {
-        return _context.Users.FirstOrDefault(u => u.Id == id);
+        return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
     }
 
     private string HashPassword(string password)
@@ -121,9 +147,8 @@ public class UserService : IUserService
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha256Signature)
         };
+
         var token = tokenhandler.CreateToken(TokenDescriptor);
-        var tokenstring = tokenhandler.WriteToken(token);
-        
-        return tokenstring;
+        return tokenhandler.WriteToken(token);
     }
-} 
+}

@@ -4,6 +4,7 @@ using BankApp_Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankApp_Data.Migrations
 {
     [DbContext(typeof(BankAppContext))]
-    partial class BankAppContextModelSnapshot : ModelSnapshot
+    [Migration("20251211083132_adminRoleInit")]
+    partial class adminRoleInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +43,7 @@ namespace BankApp_Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accountants", (string)null);
+                    b.ToTable("Accountants");
                 });
 
             modelBuilder.Entity("BankApp_Domain.Loan", b =>
@@ -73,7 +76,7 @@ namespace BankApp_Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Loans", (string)null);
+                    b.ToTable("Loans");
                 });
 
             modelBuilder.Entity("BankApp_Domain.LoggedUserInfo", b =>
@@ -100,7 +103,7 @@ namespace BankApp_Data.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("LoggedUserInfos", (string)null);
+                    b.ToTable("LoggedUserInfos");
                 });
 
             modelBuilder.Entity("BankApp_Domain.User", b =>
@@ -143,7 +146,7 @@ namespace BankApp_Data.Migrations
 
                     b.HasIndex("AccountantId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("BankApp_Domain.Loan", b =>

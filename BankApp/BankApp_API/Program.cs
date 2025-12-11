@@ -62,6 +62,7 @@ public class Program
         builder.Services.AddControllers().AddJsonOptions(options =>
         {
             options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve; 
+            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             // Or ReferenceHandler.IgnoreCycles for .NET 6+
         });
         builder.Services.AddControllers()
@@ -71,9 +72,17 @@ public class Program
             });
 
         builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<AdminService>();
+      
+
 
 
         var app = builder.Build();
+        using var scope = app.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<BankAppContext>();
+
+        var seeder = new AdminSeeder(context);
+        seeder.Seed();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
@@ -82,6 +91,7 @@ public class Program
             app.UseSwaggerUI();
         }
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
 
