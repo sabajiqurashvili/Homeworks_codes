@@ -67,7 +67,7 @@ public class AccountantController : Controller
     }
 
     [Authorize(Roles = Roles.Accountant)]
-    [HttpPut("Users/BlockUser/{UserId}")]
+    [HttpPut("Users/Block/{UserId}")]
     public async Task<IActionResult> BlockUser(int userId)
     {
         if(userId < 0) return BadRequest("Invalid userId");

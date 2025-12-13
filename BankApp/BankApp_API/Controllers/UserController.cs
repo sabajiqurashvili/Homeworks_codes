@@ -82,7 +82,7 @@ public class UserController : Controller
     }
 
     [Authorize(Roles = Roles.User)]
-    [HttpPost("LoanRequest")]
+    [HttpPost("loans")]
     public async Task<IActionResult> RequestLoan([FromBody] LoanDto loanDto)
     {
         var currentUserId = int.Parse(User.FindFirst(ClaimTypes.Name).Value);
@@ -106,7 +106,7 @@ public class UserController : Controller
     }
 
     [Authorize(Roles = Roles.User)]
-    [HttpGet("GetLoans")]
+    [HttpGet("loans/my")]
     public async Task<IActionResult> GetLoans()
     {
         var currentUserId = int.Parse(User.FindFirst(ClaimTypes.Name).Value);
@@ -115,7 +115,7 @@ public class UserController : Controller
     }
 
     [Authorize(Roles = Roles.User)]
-    [HttpPut("UpdateLoan/{loanId}")]
+    [HttpPut("loans/{loanId}")]
     public async Task<IActionResult> UpdateLoan(int loanId,[FromBody] LoanDto loanDto)
     {
         var currentUserId = int.Parse(User.FindFirst(ClaimTypes.Name).Value);
@@ -140,7 +140,7 @@ public class UserController : Controller
     }
 
     [Authorize(Roles = Roles.User)]
-    [HttpDelete("DeleteLoan/{loanId}")]
+    [HttpDelete("loans/{loanId}")]
     public async Task<IActionResult> DeleteLoan(int loanId)
     {
         var currentUserId = int.Parse(User.FindFirst(ClaimTypes.Name).Value);
