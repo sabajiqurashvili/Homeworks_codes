@@ -73,6 +73,7 @@ public class Program
 
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<AdminService>();
+        builder.Services.AddScoped<IAccountantService, AccountantService>();
       
 
 

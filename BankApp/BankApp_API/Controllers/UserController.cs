@@ -60,7 +60,7 @@ public class UserController : Controller
         }
         catch (Exception e)
         {
-            return BadRequest(new { message = e.Message });
+            return BadRequest(new Dictionary<string,string>(){{"message" , e.Message }});
         }
     }
 

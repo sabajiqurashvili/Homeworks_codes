@@ -133,6 +133,7 @@ public class UserService : IUserService
             Status = Status.Proccesing
         };
         _context.Loans.Add(loan);
+        _logger.LogInformation("Added Loan from User : {UserId}", userId);
         await _context.SaveChangesAsync();
         return loan;
     }
@@ -147,12 +148,14 @@ public class UserService : IUserService
     {
         if (!await _context.Loans.AnyAsync(l => l.UserId == userId && l.Id == loanId))
         {
+            _logger.LogError("Loan {LoanId} not found", loanId);
             throw new Exception($"Loan {loanId} not found");
         }
         
        var loan = await _context.Loans.FirstOrDefaultAsync(l => l.UserId == userId && l.Id == loanId);
        if (loan.Status != Status.Proccesing)
        {
+           _logger.LogError("Loan {LoanId} status must be proccesing", loanId);
            throw new Exception("Loan status must be proccesing");
        }
        
@@ -161,6 +164,7 @@ public class UserService : IUserService
        loan.Currency = loanDto.Currency;
        loan.LoanPeriodInMonths = loanDto.LoanPeriodInMonths;
        _context.Loans.Update(loan);
+       _logger.LogInformation("Updated Loan from User : {UserId}", userId);
        await _context.SaveChangesAsync();
        return loan;
     }
@@ -169,6 +173,7 @@ public class UserService : IUserService
     {
         if (!await _context.Loans.AnyAsync(l => l.UserId == userId && l.Id == loanId))
         {
+            _logger.LogError("Loan {LoanId} not found", loanId);
             throw new Exception($"Loan {loanId} not found");
         }
         
@@ -178,6 +183,7 @@ public class UserService : IUserService
             throw new Exception("Loan status must be proccesing");
         }
         _context.Loans.Remove(loan);
+        _logger.LogInformation("Deleted Loan from User : {UserId}", userId);
         await _context.SaveChangesAsync();
     }
 

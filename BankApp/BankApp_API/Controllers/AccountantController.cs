@@ -24,6 +24,7 @@ public class AccountantController : Controller
         try
         {
             var loans = await _accountantService.SeeLoans(userId);
+            if(loans.Count == 0) return NotFound("No loans found");
             return Ok(loans);
         }
         catch (Exception e)
@@ -45,14 +46,14 @@ public class AccountantController : Controller
         {
             return BadRequest(e.Message);
         }
-        return Ok("Loan has been updated successfully");
+        return Ok($"loan status changed to {loanDto.Status}");
     }
 
     [Authorize(Roles = Roles.Accountant)]
     [HttpDelete("User/Loans/{userId},{loanId}")]
     public async Task<IActionResult> DeleteLoan(int userId, int loanId)
     {
-        if(userId < 0 || loanId<0) return BadRequest("userId and loanId cant be null");
+        if(userId < 0 || loanId<0) return BadRequest("userId and loanId cant be less than 0");
         try
         {
             await _accountantService.DeleteLoan(userId, loanId);
@@ -78,6 +79,6 @@ public class AccountantController : Controller
         {
            return BadRequest(e.Message);
         }
-        return Ok($"UserID : {userId} has been blocked ");
+        return Ok($"UserID : {userId} has been blocked");
     }
 }
